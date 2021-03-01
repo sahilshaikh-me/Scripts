@@ -1,0 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WeaponSway : MonoBehaviour
+{
+    public float amount;
+    public float maxamount;
+    public float smoothAmount;
+
+    private Vector3 initialPosition;
+    public GameObject TouchScreen;
+    // Start is called before the first frame update
+    void Start()
+    {
+        initialPosition = transform.localPosition;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        float movementX = - TouchScreen.GetComponent<FixedTouchField>().TouchDist.x * amount;
+        float movementY = -TouchScreen.GetComponent<FixedTouchField>().TouchDist.x * amount;
+        movementX = Mathf.Clamp(movementX, -maxamount, maxamount);
+        movementY = Mathf.Clamp(movementY, -maxamount, maxamount);
+
+        Vector3 finalPosition = new Vector3(movementX, movementY, 0);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, finalPosition + initialPosition, Time.deltaTime * smoothAmount);
+
+
+
+    }
+}
