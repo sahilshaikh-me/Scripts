@@ -11,7 +11,8 @@ public class TouchTest : MonoBehaviour
     Vector2 firstTouchPrevPos, secondTouchPrevPos;
 
     Rect notouchable_area;
-
+    public Vector3 min = new Vector3(0.3f, 0.3f, 0.3f);
+    public Vector3 max = new Vector3(4f, 4f, 4f);
    
     private void Start()
     {
@@ -75,22 +76,22 @@ public class TouchTest : MonoBehaviour
                     {
                         //ScaleDown
                         //  transform.localScale -= new Vector3(transform.localScale.x * ScaleModifier, transform.localScale.y * ScaleModifier, transform.localScale.z * ScaleModifier) * Time.deltaTime;
-                        transform.localScale -= Vector3.one * ScaleModifier * Time.deltaTime;
-                        Vector3 newScale = Vector3.zero;
-                        newScale.x = Mathf.Clamp(transform.localScale.x, 0.3f, 1f);
-                        newScale.y = Mathf.Clamp(transform.localScale.y, 0.3f, 1f);
-                        newScale.z = Mathf.Clamp(transform.localScale.z, 0.3f, 1f);
-                        transform.localScale = newScale;    
+                      //  transform.localScale -= Vector3.one * ScaleModifier * Time.deltaTime;
+                          Vector3 newScale = new Vector3();
+                        newScale.x = Mathf.Clamp(transform.localScale.x - ScaleModifier, min.x, max.x);
+                        newScale.y = Mathf.Clamp(transform.localScale.y - ScaleModifier, min.y, max.y);
+                        newScale.z = Mathf.Clamp(transform.localScale.z - ScaleModifier, min.z, max.z);
+                        transform.localScale = newScale;   
                     }
                     if (touchesPrevposDiff < touchCurrentPossDiff)
                     {
                         //ScaleUp
                         // transform.localScale += new Vector3(transform.localScale.x , transform.localScale.y , transform.localScale.z ) *ScaleModifier * Time.deltaTime;
-                        transform.localScale += Vector3.one * ScaleModifier * Time.deltaTime;
-                        Vector3 newScale = Vector3.zero;
-                        newScale.x = Mathf.Clamp(transform.localScale.x, 1f, 4);
-                        newScale.y = Mathf.Clamp(transform.localScale.y, 1f, 4);
-                        newScale.z = Mathf.Clamp(transform.localScale.z, 1f, 4);
+                       // transform.localScale += Vector3.one * ScaleModifier * Time.deltaTime;
+                       Vector3 newScale = new Vector3();
+                        newScale.x = Mathf.Clamp(transform.localScale.x + ScaleModifier, min.x, max.x);
+                        newScale.y = Mathf.Clamp(transform.localScale.y + ScaleModifier, min.y, max.y);
+                        newScale.z = Mathf.Clamp(transform.localScale.z + ScaleModifier, min.z, max.z);
                         transform.localScale = newScale;
                     }
                 }
