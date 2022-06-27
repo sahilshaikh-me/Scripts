@@ -43,3 +43,24 @@ public class AddressablesController : MonoBehaviour
 		}
 	}
 }
+
+
+public class Load(){
+
+        void Start()
+	{
+		AsyncOperationHandle<IResourceLocator> loadContentCatalogAsync = Addressables.LoadContentCatalogAsync(
+		 @"http://localhost/addressables/catalog_2021.12.09.10.54.40.json");
+		loadContentCatalogAsync.Completed += OnCompleted;
+	}
+	private void OnCompleted(AsyncOperationHandle<IResourceLocator> obj)
+	{
+		Addressables.InstantiateAsync("cube");
+		Addressables.InstantiateAsync("sphere");
+	}
+
+
+
+
+
+}
