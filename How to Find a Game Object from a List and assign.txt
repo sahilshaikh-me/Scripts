@@ -1,0 +1,2 @@
+How to Find a Game Object from a List and assign?
+PrimaryWeapon = myObjList.Where(x => x.name == yourname).SingleOrDefault();
