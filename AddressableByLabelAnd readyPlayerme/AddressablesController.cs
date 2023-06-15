@@ -45,7 +45,7 @@ public class AddressablesController : MonoBehaviour
 }
 
 
-public class Load(){
+public class Load{
 
         void Start()
 	{
